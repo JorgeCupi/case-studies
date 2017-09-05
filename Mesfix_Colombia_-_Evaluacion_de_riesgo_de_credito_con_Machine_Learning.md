@@ -136,9 +136,35 @@ Para entender por qué no hace sentido el usar información sensible de una empr
 
 La respuesta a todas las preguntas anteriores es NO y un QUIZAS en algunas ocasiones. Por tanto, nuestro siguiente paso en la adquisición de datos sera crear una tabla única que cubra la relación empresa - inversion - inversionista y que contenga información sensible.
 
-[continuara... ]
+[POR CONTINUAR / COMPLEMENTAR]
+
+Como lo mencionabamos en la seccion de herramientas contamos con Azure Machine Learning Studio (AMLS). En el proyecto usaremos el servicio sin detallar los pormenores de su manejo ya que en la seccion de referencias incluimos el enlace a un tutorial mas completo de la herramienta. [[4]](#referencias)
+
 
 ## Modelado ##
+Estamos en la fase de modelado, lo cual quiere decir que de los pasos previos de TDSP ya tenemos un set de datos limpio y obtenido de diferentes fuentes de datos (multiples bases de datos y/o multiples tablas dentro de dichas bases) para comenzar a aplicar algoritmos de Machine Learing.
+
+### Eleccion de algoritmos ###
+¿Hay un algoritmo magico en la disciplina de Machine Learning que pueda responder cualquier pregunta solo entregando nuestros datos? No, en realidad, Machine Learning tiene diferentes algoritmos agrupados generalmente en las siguientes secciones [[5]](#referencias):
+- Algoritmos supervisados
+    - Regresion
+    - Clasificacion
+    - Deteccion de anomalias
+- Algoritmos no supervisados
+    - Clustering
+
+En resumen, la diferencia entre algoritmos supervisados y no supervisados radica en que los primeros realizan predicciones en base a un set de ejemplos en los que necesitamos identificar la variable a predecir mientras que los algoritmos no supervisados estan pensados para agrupar u organizar datos no necesiriamente etiquetados data su naturaleza compleja.
+
+Por tanto, parece que para nuestro objetivo haremos uso de algoritmos supervisados, veamos que nos ofrece cada uno:
+- *Algoritmos de clasificacion*. Son usados cuando se desea predecir una categoria de entre muchas. Por ejemplo saber si en una imagen se encuentra a un perro o gato, saber si un equipo ganara o perdera un partido, etc.
+- *Algoritmos de regresion*. Usados para predecir valores como por ejemplo: El precio de un automovil, el precio de las acciones en un dia dado, etc.
+- *Algoritmos de deteccion de anomalias*. Usados cuando el objetivo es el de identificar puntos inusuales en un set de datos como una transaccion bancaria irregular para realizar deteccion de fraudes, por ejemplo.
+
+¿Entonces con que tipo de algoritmos nos quedamos?
+Aparentemente necesitaremos usar dos tipos para cumplir con nuestros objetivos:
+- **Regresion** Esperamos que algoritmos de regresion nos ayuden a determinar el numero de dias o meses de potencial mora de una empresa en base a los parametros que recogimos en la fase de [Adquisicion de datos](#adquisición-de-datos) 
+- **Clasificacion** Particularmente, haremos uso de algoritmos de clasificacion binomial ya que solo esperamos solo dos posibles respuestas: Si una empresa tiene o no alto riesgo de credito.
+
 
 ## Despliegue ##
 
@@ -149,12 +175,22 @@ La respuesta a todas las preguntas anteriores es NO y un QUIZAS en algunas ocasi
 ### Recomendaciones ###
 
 ## Agradecimientos ##
-
-## Recursos adicionales ##
-
-## Referencias ##
+ 
+## Referencias y recursos adicionales ##
 [1] Springer. 2014. Bank Management and Control. http://www.springer.com/la/book/9783642403736
 
 [2] Microsoft. 2017 Team Data Science Process overview https://docs.microsoft.com/en-us/azure/machine-learning/data-science-process-overview 
 
-[3] Ministerio de Tecnologías de la Información y las Comunicaciones. 2013. https://www.mintic.gov.co/portal/604/articles-4274_documento.pdf
+[3] Ministerio de Tecnologías de la Información y las Comunicaciones. 2013.Ley 1581 de 2012 de Habeas Data https://www.mintic.gov.co/portal/604/articles-4274_documento.pdf
+
+[4] Microsoft. 2017. What is Machine Learning in the Azure cloud. https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-what-is-machine-learning 
+
+[5] Microsoft. 2017. How to choose algorithms for Microsoft Azure Machine Learning https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-algorithm-choice 
+
+[6] Microsoft. 2017. Desarollo de una solución de análisis predictiva para la evaluación del riesgo de crédito en Aprendizaje automático de Azure. https://docs.microsoft.com/es-es/azure/machine-learning/machine-learning-walkthrough-develop-predictive-solution 
+
+[7] University of Washington. 2014. Introduction to Boosted Trees. https://homes.cs.washington.edu/~tqchen/pdf/BoostedTree.pdf
+
+[8] Microsoft. 2017. Boosted Decision Tree Regression. https://msdn.microsoft.com/en-us/library/azure/dn905801.aspx
+
+[9] Microsoft. 2017. Two-Class Boosted Decision Tree https://msdn.microsoft.com/en-us/library/azure/dn906025.aspx 
