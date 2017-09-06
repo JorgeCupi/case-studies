@@ -125,7 +125,7 @@ Básicamente porque en cruzándolas deberíamos poder encontrar información rel
 - Tiempo de pago de la factura
 - Etc.
 
-Sin embargo dijimos que no podemos incluir información sensible y que incluso si pudieramos hacerlo, no nos serviria de nada. Toquemos este detalle con algo de profundidad.
+Sin embargo dijimos que no podemos incluir información sensible y que incluso si pudiéramos hacerlo, no nos serviría de nada. Toquemos este detalle con algo de profundidad.
 
 Para entender por qué no hace sentido el usar información sensible de una empresa o de los inversionistas hagamos las siguientes preguntas:
 - ¿Hay una relación entre el nombre o razon social de una empresa y su riesgo de crédito?
@@ -134,52 +134,67 @@ Para entender por qué no hace sentido el usar información sensible de una empr
 - ¿Mejorará el rendimiento de nuestro algoritmo al tener el número de cédula de identidad de nuestros inversores?
 - ¿Los apellidos de un inversor son datos relevantes para determinar si una empresa le pagará a tiempo a dicho inversor?
 
-La respuesta a todas las preguntas anteriores es NO y un QUIZAS en algunas ocasiones. Por tanto, nuestro siguiente paso en la adquisición de datos sera crear una tabla única que cubra la relación empresa - inversion - inversionista y que contenga información sensible.
+La respuesta a todas las preguntas anteriores es NO y un QUIZAS en algunas ocasiones. Por tanto, nuestro siguiente paso en la adquisición de datos sera crear una tabla única que cubra la relación empresa - inversión - inversionista y que contenga información sensible.
 
 [POR CONTINUAR / COMPLEMENTAR]
 
-Como lo mencionabamos en la seccion de herramientas contamos con Azure Machine Learning Studio (AMLS). En el proyecto usaremos el servicio sin detallar los pormenores de su manejo ya que en la seccion de referencias incluimos el enlace a un tutorial mas completo de la herramienta. [[4]](#referencias)
+Como lo mencionábamos en la sección de herramientas contamos con Azure Machine Learning Studio (AMLS). En el proyecto usaremos el servicio sin detallar los pormenores de su manejo ya que en la sección de referencias incluimos el enlace a un tutorial más completo de la herramienta. [[4]](#referencias)
 
 
 ## Modelado ##
-Estamos en la fase de modelado, lo cual quiere decir que de los pasos previos de TDSP ya tenemos un set de datos limpio y obtenido de diferentes fuentes de datos (multiples bases de datos y/o multiples tablas dentro de dichas bases) para comenzar a aplicar algoritmos de Machine Learing.
+Estamos en la fase de modelado, lo cual quiere decir que de los pasos previos de TDSP ya tenemos un set de datos limpio y obtenido de diferentes fuentes de datos (múltiples bases de datos y/o múltiples tablas dentro de dichas bases) para comenzar a aplicar algoritmos de Machine Learing.
 
-### Eleccion de algoritmos ###
-¿Hay un algoritmo magico en la disciplina de Machine Learning que pueda responder cualquier pregunta solo entregando nuestros datos? No, en realidad, Machine Learning tiene diferentes algoritmos agrupados generalmente en las siguientes secciones [[5]](#referencias):
+### Elección de algoritmos ###
+¿Hay un algoritmo mágico en la disciplina de Machine Learning que pueda responder cualquier pregunta sólo entregando nuestros datos? No, en realidad, Machine Learning tiene diferentes algoritmos agrupados generalmente en las siguientes secciones [[5]](#referencias):
 - Algoritmos supervisados
-    - Regresion
-    - Clasificacion
-    - Deteccion de anomalias
+    - Regresión
+    - Clasificación
+    - Detección de anomalías
 - Algoritmos no supervisados
     - Clustering
 
-En resumen, la diferencia entre algoritmos supervisados y no supervisados radica en que los primeros realizan predicciones en base a un set de ejemplos en los que necesitamos identificar la variable a predecir mientras que los algoritmos no supervisados estan pensados para agrupar u organizar datos no necesiriamente etiquetados data su naturaleza compleja.
+En resumen, la diferencia entre algoritmos supervisados y no supervisados radica en que los primeros realizan predicciones en base a un set de ejemplos en los que necesitamos identificar la variable a predecir mientras que los algoritmos no supervisados están pensados para agrupar u organizar datos no necesariamente etiquetados dada su naturaleza compleja.
 
-Por tanto, parece que para nuestro objetivo haremos uso de algoritmos supervisados, veamos que nos ofrece cada uno:
-- *Algoritmos de clasificacion*. Son usados cuando se desea predecir una categoria de entre muchas. Por ejemplo saber si en una imagen se encuentra a un perro o gato, saber si un equipo ganara o perdera un partido, etc.
-- *Algoritmos de regresion*. Usados para predecir valores como por ejemplo: El precio de un automovil, el precio de las acciones en un dia dado, etc.
-- *Algoritmos de deteccion de anomalias*. Usados cuando el objetivo es el de identificar puntos inusuales en un set de datos como una transaccion bancaria irregular para realizar deteccion de fraudes, por ejemplo.
+Por tanto, parece que para nuestro objetivo haremos uso de algoritmos supervisados, veamos qué nos ofrece cada uno:
+- *Algoritmos de clasificación*. Son usados cuando se desea predecir una categoría de entre muchas. Por ejemplo saber si en una imagen se encuentra a un perro o gato, saber si un equipo ganará o perderá un partido, etc.
+- *Algoritmos de regresión*. Usados para predecir valores como por ejemplo: El precio de un automóvil, el precio de las acciones en un día dado, etc.
+- *Algoritmos de detección de anomalías*. Usados cuando el objetivo es el de identificar puntos inusuales en un set de datos como una transacción bancaria irregular para realizar detección de fraudes, por ejemplo.
 
-¿Entonces con que tipo de algoritmos nos quedamos?
+¿Entonces con qué tipo de algoritmos nos quedamos?
 Aparentemente necesitaremos usar dos tipos para cumplir con nuestros objetivos:
-- **Regresion** Esperamos que algoritmos de regresion nos ayuden a determinar el numero de dias o meses de potencial mora de una empresa en base a los parametros que recogimos en la fase de [Adquisicion de datos](#adquisición-de-datos) 
-- **Clasificacion** Particularmente, haremos uso de algoritmos de clasificacion binomial ya que solo esperamos solo dos posibles respuestas: Si una empresa tiene o no alto riesgo de credito.
+- **Regresión** Esperamos que los algoritmos de regresión nos ayuden a determinar el número de días o meses de potencial mora de una empresa en base a los parámetros que recogimos en la fase de [Adquisición de datos](#adquisición-de-datos).
+- **Clasificación** Particularmente, haremos uso de algoritmos de clasificación binomial ya que esperamos solo dos posibles respuestas: Si una empresa tiene o no alto riesgo de crédito.
 
+### Predecir mora en futuros pagos mediante regresión ###
+Recordemos que del segmento de [Adquisición de datos](#adquisición-de-datos) pudimos obtener nuestro dataset llamado 'Mesfix' y que ahora al fin usaremos para aplicarle algoritmos de machine learning. Visualicemos el dataset para preguntarnos que valores nos podrian ser de utilidad para predecir mora:
+
+[IMAGEN DE VISUALIZACION EN AZURE ML]
+[POR CONTINUAR / COMPLEMENTAR]
+
+### Determinar si una empresa formará parte o no de la cartera de inversión en Mesfix usando clasificación ###
+Al igual que hicimos con los metodos de regresión, visualicemos nuevamente el dataset para escoger valores útiles en clasificación:
+
+[IMAGEN DE VISUALIZACION EN AZURE ML]
+[POR CONTINUAR / COMPLEMENTAR]
 
 ## Despliegue ##
+Ahora que ya tenemos algoritmos funcionando es hora de desplegarlos en un servicio web para que puedan ser usados desde las aplicaciones de Mesfix
+[IMAGEN DE VISUALIZACION EN AZURE ML]
+[POR CONTINUAR / COMPLEMENTAR]
+
 
 ## Aceptación del cliente ##
 
-### Conclusiones ###
+## Conclusiones ##
 
-### Recomendaciones ###
+## Recomendaciones ##
 
 ## Agradecimientos ##
  
 ## Referencias y recursos adicionales ##
 [1] Springer. 2014. Bank Management and Control. http://www.springer.com/la/book/9783642403736
 
-[2] Microsoft. 2017 Team Data Science Process overview https://docs.microsoft.com/en-us/azure/machine-learning/data-science-process-overview 
+[2] Microsoft. 2017. Team Data Science Process overview https://docs.microsoft.com/en-us/azure/machine-learning/data-science-process-overview 
 
 [3] Ministerio de Tecnologías de la Información y las Comunicaciones. 2013.Ley 1581 de 2012 de Habeas Data https://www.mintic.gov.co/portal/604/articles-4274_documento.pdf
 
