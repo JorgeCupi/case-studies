@@ -159,19 +159,19 @@ If you want to create your own bot, we won't cover the whole procedure in the re
 #### Creating and hosting a bot ####
 First we need to create a new Azure Bot Service in our Azure portal:
 
-![Image 14. Image of the architecture proposed for the project.](images/bancopopular/AzureBotService1.png)
+![Image 14. Creating our Azure Bot Service.](images/bancopopular/AzureBotService1.png)
 
-![Image 15. Image of the architecture proposed for the project.](images/bancopopular/AzureBotService2.png)
+![Image 15. Filling the Bot Service parameters in Azure.](images/bancopopular/AzureBotService2.png)
 
 Since Azure Bot Service is integrated with Azure Bot Framework, once we start creating our bot the wizard asks us to create a new Microsoft App ID. Why? Because The bot Framework uses this ID to create the bot in its directory to later publish it to multiple channels.
 
-![Image 16. Image of the architecture proposed for the project.](images/bancopopular/AzureBotService3.png)
+![Image 16. Creating a Microsoft App ID.](images/bancopopular/AzureBotService3.png)
 
 Once we have generated a new ID and password from the App registration portal we can either choose C# or Node JS to build our bot. Banco Popular developers have more proficiency in Javascript so we'll stick with Node JS and select the 'Basic' template:
 
-![Image 17. Image of the architecture proposed for the project.](images/bancopopular/AzureBotService4.png)
+![Image 17. Choosing a bot template.](images/bancopopular/AzureBotService4.png)
 
-Bot Builder kicks in as we import the SDK to use it for creating our dialogs according to the conversation tree we designed before.
+Bot Builder kicks in as we import the SDK to use it for creating our dialogs according to the conversation tree we designed before:
 
 ```javascript
 var builder = require("botbuilder");
@@ -179,7 +179,6 @@ var botbuilder_azure = require("botbuilder-azure");
 var path = require('path');
 const request = require('request');
 ```
-><i>Image 3. Power BI Embedded UWP App Manager running and previewing a report that was uploaded.</i>
 
 For testing purposes we declare a 'useEmulator' variable that will allow us to use the Bot Emulator App [[7]](#references) for Windows, Linux or Mac deskptops: 
 
@@ -235,7 +234,7 @@ After a second review of our conversation tree and current usage from the bank c
 
  Let's create a QnA account by going to https://qnamaker.ai/ and signing in with a Microsoft Account and clicking the "Create new service" tab:
 
-![Image 18. Image of the QnA Maker site.](images/bancopopular/AzureBotService5.png)
+![Image 18. Creating our QnA service.](images/bancopopular/AzureBotService5.png)
  
 Once we assign a name to the service we must choose one of three options:
 - Insert URLs from our websites FAQs,
@@ -243,14 +242,14 @@ Once we assign a name to the service we must choose one of three options:
 - Start from scratch by creating our own questions and answers in a later page.
 
 Once we have our questions and answers, we just need to click on 'Save & retrain' and then 'Publish'
-![Image 19. Image of the QnA Maker site.](images/bancopopular/AzureBotService6.png)
+![Image 19. Publishing our QnA service.](images/bancopopular/AzureBotService6.png)
 
 Now we have two keys in the next screen:
 - Ocp-Apim-Subscription-Key as QnAKey
 - Knowledge Base as QnABase
 
 which we'll save in our Azure Function App settings by clicking the "Settings" tab and then opening the "Application settings":
-![Image 19. Image of the Application settings site in Azure Bot Services.](images/bancopopular/AzureBotService7.png)
+![Image 20. Image of the Application settings site in Azure Bot Services.](images/bancopopular/AzureBotService7.png)
 
 
 Bot Builder comes with a built in functionality to work with QnA Maker [[8]](#references):
@@ -404,7 +403,7 @@ bot.dialog('preguntasFrecuentes', function(session){
 
 #### Publishing the bot ####
 Now that all of the dialogs are complete, publishing our bot to multiple channels is as easy as enabling them on the 'Channels' tab:
-![Image 20. Image of the Publication site in Azure Bot Services.](images/bancopopular/AzureBotService8.png)
+![Image 21. Image of the Publication site in Azure Bot Services.](images/bancopopular/AzureBotService8.png)
 
 ## Conclusion ##
 During our week hackaton, we were able to rethink, design, create and publish a customer self service bot that covered Banco Popular's main needs for a bot.
