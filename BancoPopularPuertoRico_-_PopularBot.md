@@ -7,14 +7,14 @@ Every day, thousands of clients enter Banco Popular's website looking for inform
 - How to open a bank account,
 - What to do if a credit card has been stolen or lost,
 - How to get a credit card,
-- What is the bank's route and tranist number,
+- What is the bank's route and transit number,
 - Make an online payment,
 - Insurance offerings
 - How to request a loan, among other questions.
 
 Given the vast services that the bank offers, information provided at the site could be overwhelming and difficult to reach at first to current and potential clients. So Banco Popular built a chat bot to their spanish speaking clients but they felt they could do better in terms of having a more practical yet human bot to assist their clients.
 
-While this hackfest objectives are to build a proof of concept on how the bot should interact with users, we want to build a fully functioning bot covering multiple scenarios and allowing customers to have an assistant that will give them straight information of redirect them to the correct bank site.
+While this hackfest objectives are to build a proof of concept on how the bot should interact with users, we want to build a fully functioning bot covering multiple scenarios and allowing customers to have an assistant that will give them straight information or redirect them to the correct bank site.
  
 After this interaction, Banco Popular's next step is to connect the Bot to their core and offer personalized interactions to current clients based on previous conversations.
 
@@ -54,7 +54,7 @@ Banco Popular's current bot have scenarios that need improvement:
 - With technologies such as Language Understanding Intelligent Services (LUIS), QnA maker, plain regular expressions and others, the bank team does not have a clear path on which services to use and why or how to use them.
 
 
-<i>“No matter the technologies used, we want <b>Popular Bot</b> to be more functional to our clients. They need to feel the service is really helpful and more human friendly and not just a bot that answers their questions with plaint text”</i> – <b>Luis Matos, IT Supervisor - Banco Popular.</b>
+<i>“No matter the technologies used, we want <b>Popular Bot</b> to be more functional to our clients. They need to feel the service is really helpful and more human friendly and not just a bot that answers their questions with plain text”</i> – <b>Luis Matos, IT Supervisor - Banco Popular.</b>
 
 ![Image 6. Banco Popular bot screenshot.](images/bancopopular/Bot_Popular_2.png) ![Image 7. Banco Popular bot screenshot.](images/bancopopular/Bot_Popular_3.png)![Image 8. Banco Popular screenshot.](images/bancopopular/Bot_Popular_4.png)
 
@@ -278,7 +278,7 @@ const uri = `https://westus.api.cognitive.microsoft.com/qnamaker/v1.0/knowledgeb
 Our bot is now ready to start dialogs with the bank clients:
 - The 'root' dialog will grab the user's message and try to get an answer from QnA maker.
 - If QnA maker has an answer available (available meaning that has a predicted score of at least 80/100) it will be shown to the user. - Otherwise, Bot Builder's Action triggers will try to catch the phrase / keywords written by the user 
-- Finally, it the keywords / phrase written by the user does not land on a bot dialog, the main dialog will display a 'I'm sorry, I couldn't catch you' message and will show the user the bot main menu:
+- Finally, if the keywords / phrase written by the user does not land on a bot dialog, the main dialog will display a 'I'm sorry, I couldn't catch you' message and will show the user the bot main menu:
 
 ```javascript
 bot.dialog('/',function(session){
@@ -414,7 +414,7 @@ During our week hackaton, we were able to rethink, design, create and publish a 
 ### Learnings ###
 To succesfully develop a bot it is important, if not critical, to first discuss what needs will the bot cover and write down in paper some questions the bot needs to answer. Only after this is done we can start to choose technologies and write code. Not the other way around.
 
-While services like LUIS.ai, API.ai are usually used hand to hand in the construction of bots. They are not always necessary like we saw in this engagement. In fact, such services should be the lasts to think about when designing a bot and use them only if the situation requires it. Before creating and solving complex language scenarios we should as ourselves if our bot will or should work with such scenarios. So, we should ask some of the next questions:
+While services like LUIS.ai, API.ai are usually used hand to hand in the construction of bots. They are not always necessary like we saw in this engagement. In fact, such services should be the lasts to think about when designing a bot and use them only if the situation requires it. Before creating and solving complex language scenarios we should ask ourselves if our bot will or should work with such scenarios. So, we should ask some of the next questions:
 - Can I solve my complex language scenario with a menu instead of asking the user to freely write anything?
 - Should my bot or the user guide the conversation flow?
 - Are most of the user's answers just "yes" or "no" statements? Do I need cognitive services for that?
